@@ -11,17 +11,17 @@ class PrepareVectorDB:
                  persist_dir: str,
                  embedding_model_engine: str,
                  chunk_size: int,
-                 chunk_overlap: int
+                 chunk_overlap: int,
     ) -> None:
         self.embedding_model_engine = embedding_model_engine
         self.text_splitter = RecursiveCharacterTextSplitter(
             chunk_size=chunk_size,
             chunk_overlap=chunk_overlap,
-            seperators=["\n\n", "\n"," ",""]
+            separators=["\n\n", "\n"," ",""]
         )
         self.data_dir = data_dir
         self.persist_dir = persist_dir
-        self.embedding = GoogleGenerativeAIEmbeddings()
+        self.embedding = embedding_model_engine
 
     def __load_all_documents(self) -> List:
         doc_counter = 0

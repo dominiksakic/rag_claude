@@ -33,8 +33,8 @@ class LoadConfig:
             #Memory
             self.number_of_q_a_pairs = app_config["memory"]["number_of_q_a_pairs"]
 
-            # Load OpenAI credentials
-            self.load_openai_cfg()
+            # Load Google credentials
+            self.load_google_api_key()
 
             # clean up the upload doc vectordb if it exists
             self.create_directory(self.persist_directory)

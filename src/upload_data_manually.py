@@ -7,7 +7,7 @@ CONFIG = LoadConfig()
 def upload_data_manually() -> None:
     prepare_vectordb_instance = PrepareVectorDB(
         data_dir=CONFIG.data_directory,
-        perist_dir=CONFIG.persist_directory,
+        persist_dir=CONFIG.persist_directory,
         embedding_model_engine=CONFIG.embedding_model_engine,
         chunk_size=CONFIG.chunk_size,
         chunk_overlap=CONFIG.chunk_overlap,

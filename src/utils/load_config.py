@@ -21,7 +21,7 @@ class LoadConfig:
             self.custom_persist_directory = str(here(
                 app_config["directories"]["persist_directory"]
             ))
-            self.embedding_model = GoogleGenerativeAIEmbeddings()
+            self.embedding_model = GoogleGenerativeAIEmbeddings(model=app_config["embedding_model_config"]["engine"])
 
             #Retrieval config
             self.data_directory = app_config["directories"]["data_directory"]

@@ -1,11 +1,11 @@
 import os
-from dotenv import load_env
+from dotenv import load_dotenv
 import yaml
 from langchain_google_genai import GoogleGenerativeAIEmbeddings
 from pyprojroot import here
 import shutil
 
-load_env()
+load_dotenv()
 
 class LoadConfig:
     def __init__(self) -> None:
@@ -41,9 +41,9 @@ class LoadConfig:
             self.remove_directory(self.custom_persist_directory)
 
     def load_google_api_key(self):
-    self.google_api_key = os.getenv("GOOGLE_API_KEY")
-    if not self.google_api_key:
-        raise ValueError("GOOGLE_API_KEY is not set in the environment.")
+        self.google_api_key = os.getenv("GOOGLE_API_KEY")
+        if not self.google_api_key:
+            raise ValueError("GOOGLE_API_KEY is not set in the environment.")
 
 
     def create_directory(self, directory_path: str):

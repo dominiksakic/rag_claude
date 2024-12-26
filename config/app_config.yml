@@ -3,27 +3,25 @@ directories:
   persist_directory: data/vectordb/processed/chroma/
 
 embedding_model_config:
-  engine:models/embedding-001 
+  engine: models/embedding-001
 
 llm_config:
-    llm_system_role: "You are a chatbot. You'll receive a prompt that includes a chat history, retrieved content from the vectorDB based on the user's question, and the source.\ 
-    Your task is to respond to the user's new question using the information from the vectorDB without relying on your own knowledge.\
-    you will receive a prompt with the the following format:
+  llm_system_role: |
+    You are a chatbot. You'll receive a prompt that includes a chat history, retrieved content from the vectorDB based on the user's question, and the source. 
+    Your task is to respond to the user's new question using the information from the vectorDB without relying on your own knowledge.
+    You will receive a prompt with the following format:
 
-    # Chat history:\n
-    [user query, response]\n\n
+    # Chat history:
+    [user query, response]
 
-    # Retrieved content number:\n
-    Content\n\n
-    Source\n\n
+    # Retrieved content number:
+    Content
 
-    # User question:\n
+    # User question:
     New question
-    "
-    engine:gemini-pro
-    temperature: 0.0
-    max_token: 4096
-
+  engine: gemini-pro
+  temperature: 0.0
+  max_token: 4096
 
 splitter_config:
   chunk_size: 1500

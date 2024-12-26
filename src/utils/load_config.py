@@ -13,7 +13,7 @@ class LoadConfig:
             app_config = yaml.load(cfg, Loader=yaml.FullLoader)
 
             #LLM config
-            self.llm_engine = app_config["llm_config"]["llm_engine"]
+            self.llm_engine = app_config["llm_config"]["engine"]
             self.llm_system_role = app_config["llm_config"]["llm_system_role"]
             self.persist_directory = str(here(
                 app_config["directories"]["persist_directory"]

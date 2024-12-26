@@ -7,11 +7,12 @@ from langchain_google_genai import GoogleGenerativeAIEmbeddings
 
 class PrepareVectorDB:
     def __init__(self,
-                 data_dir: str,
-                 persist_dir: str,
+                 data_directory: str,
+                 persist_directory: str,
                  embedding_model_engine: str,
                  chunk_size: int,
                  chunk_overlap: int,
+                 embedding_model,
     ) -> None:
         self.embedding_model_engine = embedding_model_engine
         self.text_splitter = RecursiveCharacterTextSplitter(
@@ -19,27 +20,27 @@ class PrepareVectorDB:
             chunk_overlap=chunk_overlap,
             separators=["\n\n", "\n"," ",""]
         )
-        self.data_dir = data_dir
-        self.persist_dir = persist_dir
-        self.embedding = embedding_model_engine
+        self.data_directory = data_directory
+        self.persist_directory = persist_directory
+        self.embedding = embedding_model
 
     def __load_all_documents(self) -> List:
         doc_counter = 0
-        if isinstance(self.data_dir, list):
+        if isinstance(self.data_directory, list):
             print("Loading the uploaded documents...")
             docs = []
-            for doc_dir in self.data_dir:
+            for doc_dir in self.data_directory:
                 docs.extend(PyPDFLoader(doc_dir).load())
                 doc_counter += 1
             print("Number of loaded documents:", doc_counter)
             print("Number of pages:", len(docs), "\n\n")
         else:
             print("Loading documents manually...")
-            document_list = os.listdir(self.data_dir)
+            document_list = os.listdir(self.data_directory)
             docs = []
             for doc_name in document_list:
                 docs.extend(PyPDFLoader(os.path.join(
-                    self.data_dir, doc_name)).load())
+                    self.data_directory, doc_name)).load())
                 doc_counter += 1
             print("Number of loaded documents:", doc_counter)
             print("Number of pages:", len(docs), "\n\n")
@@ -59,7 +60,7 @@ class PrepareVectorDB:
         vectordb = Chroma.from_documents(
             documents=chunked_documents,
             embedding=self.embedding,
-            persist_directory=self.persist_dir
+            persist_directory=self.persist_directory
         )
         print("VectorDB is created and saved.")
         print("Number of vectors in vectordb:",

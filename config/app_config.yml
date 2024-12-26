@@ -1,9 +1,10 @@
 directories:
   data_directory: data/docs
   persist_directory: data/vectordb/processed/chroma/
+  custom_persist_directory: data/vectordb/uploaded/chroma/
 
 embedding_model_config:
-  engine: models/embedding-001
+  engine: "models/embedding-001"
 
 llm_config:
   llm_system_role: |
@@ -19,7 +20,7 @@ llm_config:
 
     # User question:
     New question
-  engine: gemini-pro
+  engine: "gemini-pro"
   temperature: 0.0
   max_token: 4096
 

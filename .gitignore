@@ -58,3 +58,6 @@ poetry.lock
 
 # PyInstaller
 *.spec
+
+#VectorDB
+data

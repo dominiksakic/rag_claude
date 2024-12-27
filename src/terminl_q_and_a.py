@@ -28,7 +28,7 @@ while True:
     retrieved_docs_str = "# Retrieved content:\n\n" + str(retrieved_docs_page_content)
     prompt = retrieved_docs_str + "\n\n" + question
     llm = ChatGoogleGenerativeAI(
-        model="gemini-1.5-pro-latest",
+        model=APPCFG.llm_engine,
         temperature = 0
     )
     messages = [

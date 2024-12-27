@@ -20,7 +20,7 @@ llm_config:
 
     # User question:
     New question
-  engine: "gemini-pro"
+  engine: "gemini-1.5-pro-latest"
   temperature: 0.0
   max_token: 4096
 

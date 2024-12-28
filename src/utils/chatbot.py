@@ -3,6 +3,7 @@ from typing import Tuple, List, Annotated
 
 from typing_extensions import TypedDict
 
+from langgraph.checkpoint.memory import MemorySaver
 from langgraph.graph import StateGraph, START, END
 from langgraph.graph.message import add_messages
 from langchain_google_genai import ChatGoogleGenerativeAI
@@ -27,8 +28,10 @@ llm = ChatGoogleGenerativeAI(
 def chatbot(state: State):
     return {"messages":[llm.invoke(state["messages"])]}
 
+memory = MemorySaver() # in Development, for production research sql memory
+
 graph_builder.add_node("chatbot", chatbot)
 graph_builder.add_edge(START, "chatbot")
 graph_builder.add_edge("chatbot", END)
-graph = graph_builder.compile()
+graph = graph_builder.compile(checkpointer =memory)
 

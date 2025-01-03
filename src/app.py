@@ -1,4 +1,6 @@
 from utils.chatbot import graph
+from langchain_core.messages import HumanMessage, SystemMessage, AIMessage
+
 
 def stream_graph_updates(user_input: str, thread_id: str):
     config = {"configurable":{"thread_id": thread_id}}
@@ -6,7 +8,8 @@ def stream_graph_updates(user_input: str, thread_id: str):
          {"messages": [("user", user_input)]}, config, stream_mode="values"
     )
     for event in events:
-        if "messages" in event:
+        last_message = event["messages"][-1]
+        if isinstance(last_message, AIMessage):
             print(event["messages"][-1].content)
 
 def main():
